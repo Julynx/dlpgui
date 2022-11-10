@@ -66,9 +66,8 @@ case $? in
 0)
     echo "[dlpgui] >>>>>>>>>> Save"
 
-    filename="/%(title)s.%(ext)s"
-    folder_out=" --output $(cat /tmp/youtube-dl-path)"
-    COMMAND=$COMMAND$(cat /tmp/youtube-dl-url)$folder_out$filename
+    folder_out=" --output $(cat /tmp/youtube-dl-path)/%(title)s.%(ext)s"
+    COMMAND=$COMMAND$(cat /tmp/youtube-dl-url)$folder_out
 
     echo "[dlpgui] >>>>>>>>>> "$COMMAND
     ;;
