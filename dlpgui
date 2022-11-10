@@ -88,4 +88,3 @@ zenity --info --title="Youtube Downloader" --text="Download complete.\nCheck the
 
 rm /tmp/youtube-dl-url
 rm /tmp/youtube-dl-path
-rm /tmp/youtube-dl-out
