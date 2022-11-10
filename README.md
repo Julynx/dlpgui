@@ -23,3 +23,11 @@ cd dlpgui
 sudo chmod +x install.sh
 ./install.sh
 ```
+
+## Uninstallation
+Run [uninstall.sh](https://raw.githubusercontent.com/Julynx/dlpgui/main/uninstall.sh)
+
+```
+sudo chmod +x uninstall.sh
+./uninstall.sh
+```
