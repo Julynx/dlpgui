@@ -15,7 +15,7 @@ pip3 install yt-dlp
 ```
 
 ## Installation
-Download the repository and run [install.sh](https://raw.githubusercontent.com/Julynx/dlpgui/main/install.sh)
+Execute the following code to download the repository and run [install.sh](https://raw.githubusercontent.com/Julynx/dlpgui/main/install.sh)
 
 ```
 git clone https://github.com/Julynx/dlpgui
