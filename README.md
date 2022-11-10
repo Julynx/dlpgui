@@ -25,7 +25,7 @@ sudo chmod +x install.sh
 ```
 
 ## Usage
-You can download video or audio by clicking one of the two new shortcuts labeled "MP4 Downloader" and "MP3 Downloader". You will find them in your Applications menu.
+You can download video or audio by clicking one of the two new shortcuts labeled **MP4 Downloader** and **MP3 Downloader**. You will find them in your Applications menu.
 
 <br>
 <p align="center">  
