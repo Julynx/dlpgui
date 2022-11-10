@@ -83,14 +83,7 @@ case $? in
 esac
 
 # Execute the command
-notify-send "Youtube Downloader" "Downloading..."
-
-$COMMAND
-if [ $? -eq 0 ]; then
-    notify-send "Youtube Downloader" "Download completed"
-else
-    notify-send "Youtube Downloader" "Download terminated with error code $?"
-fi
+$COMMAND | zenity --progress --title="Youtube Downloader" --text="Downloading..." --pulsate --auto-close --auto-kill --width=750
 
 rm /tmp/youtube-dl-url
 rm /tmp/youtube-dl-path
