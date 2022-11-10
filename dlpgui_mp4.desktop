@@ -1,0 +1,18 @@
+[Desktop Entry]
+
+Type=Application
+
+# The version of the desktop entry specification to which this file complies
+Version=1.0
+
+# The name of the application
+Name=MP4 Downloader
+
+# The executable of the application, possibly with arguments.
+Exec=.local/bin/dlpgui mp4
+
+# The name of the icon that will be used to display this entry
+Icon=/usr/share/icons/dlpgui/dlpgui_mp4.png
+
+# Describes whether this application needs to be run in a terminal or not
+Terminal=false

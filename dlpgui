@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# Check dependencies
+which yt-dlp
+if [ $? -eq 0 ]; then
+    echo "[dlpgui] >>>>>>>>>> yt-dlp is installed"
+else
+    zenity --error --text="yt-dlp is not installed.\nPlease install it with:\n\npip3 install yt-dlp" --title="Error"
+    exit 1
+fi
+
+# Set mode to mp3 or mp4
+if [ "$1" = "mp4" ]; then
+
+    COMMAND="yt-dlp -S res,ext:mp4:m4a --recode mp4 --restrict-filenames "
+
+elif [ "$1" = "mp3" ]; then
+
+    COMMAND="yt-dlp --extract-audio --audio-format mp3 --restrict-filenames "
+
+else
+    echo "[dlpgui] >>>>>>>>>> Error: Invalid argument"
+    exit 1
+fi
+
+# Ask for a url while the input field is empty
+url=""
+while [ -z "$url" ]; do
+
+    zenity --text="Enter the URL of a video, channel or playlist:" --entry --ok-label "Save as $1" --cancel-label "Exit" --width=750 --title "Youtube Downloader" >/tmp/youtube-dl-url
+    case $? in
+    1)
+        echo "[dlpgui] >>>>>>>>>> Cancel"
+        exit 0
+        ;;
+    252)
+        echo "[dlpgui] >>>>>>>>>> Exit"
+        exit 0
+        ;;
+    esac
+
+    url=$(cat /tmp/youtube-dl-url)
+    echo "URL: "$url
+
+    if [ -z "$url" ]; then
+        zenity --error --title "Error" --text="The URL field is empty.\nPlease enter a valid URL."
+        case $? in
+        0)
+            echo "[dlpgui] >>>>>>>>>> OK"
+            ;;
+        1)
+            echo "[dlpgui] >>>>>>>>>> Cancel"
+            exit 0
+            ;;
+        252)
+            echo "[dlpgui] >>>>>>>>>> Exit"
+            exit 0
+            ;;
+        esac
+    fi
+done
+
+# Ask for a path to save the file
+zenity --text="Enter the path to save the file:" --file-selection --directory --width=750 --title "Youtube Downloader" >/tmp/youtube-dl-path
+case $? in
+0)
+    echo "[dlpgui] >>>>>>>>>> Save"
+
+    filename="/%(title)s.%(ext)s"
+    folder_out=" --output $(cat /tmp/youtube-dl-path)"
+    COMMAND=$COMMAND$(cat /tmp/youtube-dl-url)$folder_out$filename
+
+    echo "[dlpgui] >>>>>>>>>> "$COMMAND
+    ;;
+1)
+    echo "[dlpgui] >>>>>>>>>> Cancel"
+    exit 0
+    ;;
+252)
+    echo "[dlpgui] >>>>>>>>>> Exit"
+    exit 0
+    ;;
+esac
+
+# Execute the command
+notify-send "Youtube Downloader" "Downloading..."
+
+$COMMAND
+if [ $? -eq 0 ]; then
+    notify-send "Youtube Downloader" "Download completed"
+else
+    notify-send "Youtube Downloader" "Download failed with error code $?"
+fi
+
+rm /tmp/youtube-dl-url
+rm /tmp/youtube-dl-path
