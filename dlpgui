@@ -5,7 +5,7 @@ which yt-dlp
 if [ $? -eq 0 ]; then
     echo "[dlpgui] >>>>>>>>>> yt-dlp is installed"
 else
-    zenity --error --text="yt-dlp is not installed.\nPlease install it with:\n\npip3 install yt-dlp" --title="Error"
+    zenity --error --text="yt-dlp is not installed.\nPlease install it with:\n\npip3 install yt-dlp" --title="Error" --width=200
     exit 1
 fi
 
@@ -43,7 +43,7 @@ while [ -z "$url" ]; do
     echo "URL: "$url
 
     if [ -z "$url" ]; then
-        zenity --error --title "Error" --text="The URL field is empty.\nPlease enter a valid URL."
+        zenity --error --title "Error" --text="The URL field is empty.\nPlease enter a valid URL." --width=200
         case $? in
         0)
             echo "[dlpgui] >>>>>>>>>> OK"
@@ -82,7 +82,10 @@ case $? in
 esac
 
 # Execute the command
-$COMMAND | zenity --progress --title="Youtube Downloader" --text="Downloading..." --pulsate --auto-close --auto-kill --width=750
+$COMMAND | zenity --progress --title="Youtube Downloader" --text="Downloading..." --pulsate --auto-close --auto-kill --width=200
+
+zenity --info --title="Youtube Downloader" --text="Download complete.\nCheck the files." --width=200
 
 rm /tmp/youtube-dl-url
 rm /tmp/youtube-dl-path
+rm /tmp/youtube-dl-out
